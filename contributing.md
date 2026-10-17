@@ -2,86 +2,49 @@
 
 Welcome to the MCA Students Repository for IMCC!
 
-This document explains how to organize your work, use branches correctly, and submit contributions through pull requests. Please read these guidelines before contributing.
+This repository is a shared space for coursework, programming practice, assignments, and learning activities. These guidelines help everyone collaborate using Git and GitHub while keeping contributions organized.
 
-## 1. Core Rules
+## 1. Repository Structure
 
-Before you begin, understand these four rules:
+The repository contains general documentation on `main` and shared academic work on the appropriate semester branches.
 
-1. **One student, one student branch.** Use your name for your student branch, for example, `Shailesh-Parshewar`.
-2. **One subject, one directory.** Each subject has its own directory inside the semester branch.
-3. **One student directory per subject.** Store your work inside your own directory under the relevant subject.
-4. **Submit through pull requests.** Do not push directly to protected shared branches or bypass the review process.
+The semester branch organizes work by subject or course and then by student.
 
-Your branch is used to manage your contributions. Your directory is where your submitted files live after merging.
+Follow the directory structure already established in the relevant semester branch. Keep your contributions inside your own student directory and the appropriate subject or course directory.
 
-## 2. Repository and Directory Structure
+**Important:** Your Git branch and your student directory serve different purposes. A branch is a Git reference; a directory organizes files in the repository.
 
-The repository is organized as:
+## 2. Branch Naming Guide
 
-```text
-MCA-Students-Repository/
-├── README.md
-├── CONTRIBUTING.md
-└── semester-1 (branch)
-    ├── README.md
-    ├── Python/
-    │   ├── Shailesh-Parshewar/
-    │   └── Student-Name/
-    └── Data-Structures-Algorithms/
-        ├── Shailesh-Parshewar/
-        └── Student-Name/
-```
+Branch names must clearly identify the student responsible for the work.
 
-The tree shows the contents of the `semester-1` branch. Student names are examples.
+**Do not use only a subject or course name as a working branch name.** Every working branch must begin with the student's name, followed by a hyphen and a descriptive subject or task name.
 
-### Where should your files go?
+| Branch purpose | Naming convention | Example |
+|---|---|---|
+| Student branch | `student-name` | `shailesh-parshewar` |
+| Subject/course working branch | `student-name-subject-name` | `shailesh-parshewar-python` |
+| Task-specific working branch | `student-name-subject-task` | `shailesh-parshewar-python-assignments` |
 
-| Subject | Your directory |
-|---|---|
-| Python | `Python/Your-Name/` |
-| Data Structures and Algorithms | `Data-Structures-Algorithms/Your-Name/` |
+Use lowercase letters and hyphens to separate words. Avoid spaces and unnecessary special characters.
 
-Replace `Your-Name` with the name you use for your student branch.
+### Branch naming rules
 
-**Do not create a student directory directly at the root of `semester-1`.** Your directory must be inside the relevant subject directory.
+- Each student should maintain one persistent student branch.
+- All subject, course, or task working branches must begin with the student's name.
+- Do not create generic working branches such as `python`, `dsa`, or `assignments`.
+- Do not use slashes to simulate nested branches. For example, `shailesh-parshewar/python` conflicts with the existing `shailesh-parshewar` branch in Git's reference storage.
+- Keep your student branch after your pull request has been merged. You will reuse it for future contributions.
+- Working branches can be deleted when their work is merged and they are no longer needed.
 
-## 3. Understanding the Branch Structure
+## 3. Setting Up Your Student Branch
 
-This repository uses the following branches:
-
-- **`main`** — Repository-wide documentation and guidelines.
-- **`semester-1`** — The shared branch containing subjects and merged student work.
-- **Student branches** — Branches named after individual students, used to prepare contributions.
-- **Subject branches** — Temporary or ongoing local branches used to work on individual subjects.
-
-For example:
-
-```text
-semester-1
-    │
-    └── Shailesh-Parshewar       ← Student branch
-            │
-            ├── Python           ← Local subject branch
-            └── Data-Structures-Algorithms
-```
-
-This diagram represents the workflow, not a literal hierarchy. Git branches are independent references; they are not nested folders.
-
-Subject branches are intended to remain local or within your own fork. **Only push your student branch when submitting your work**, unless the repository maintainer explicitly instructs otherwise.
-
-## 4. Setting Up Your Student Branch
-
-First, clone the repository if you have not already done so:
+First, clone the repository and switch to the appropriate semester branch.
 
 ```bash
 git clone <repository-url>
 cd <repository-folder>
-```
 
-Switch to the semester branch and update it:
-
-```bash
 git fetch origin
 git switch semester-1
 git pull origin semester-1
@@ -90,223 +53,147 @@ git pull origin semester-1
 Create your student branch from the semester branch:
 
 ```bash
-git switch -c Your-Name
+git switch -c student-name
 ```
 
-For example:
+Replace `student-name` with your own name, using the naming convention above.
+
+If you have already created your student branch, switch to it instead:
 
 ```bash
-git switch -c Shailesh-Parshewar
+git switch student-name
 ```
 
-Use a consistent name for your student branch and your student directories. Check that a branch with your chosen name does not already exist in your local repository.
+Do not create a new student branch every time you contribute.
 
-If you are contributing through your own fork, make sure your fork's `semester-1` branch is up to date before creating your student branch.
+## 4. Creating a Working Branch
 
-## 5. Creating and Using Subject Branches
+Create a separate working branch for the subject, course, or task you want to work on.
 
-Create a separate local branch for each subject you want to work on.
-
-For example, to work on Python:
+Start from your student branch:
 
 ```bash
-git switch Shailesh-Parshewar
-git switch -c Python
+git switch student-name
+git switch -c student-name-subject-name
 ```
 
-Create your student directory if it does not already exist:
+For subsequent work, create another appropriately named working branch from your student branch, or reuse an existing working branch if it is suitable and has been synchronized correctly.
 
-```bash
-mkdir -p Python/Shailesh-Parshewar
-```
+**Always create working branches from your student branch, not from another subject or task branch.**
 
-Add your Python files inside that directory.
+## 5. Making and Committing Changes
 
-For another subject, switch back to your student branch and create another subject branch:
-
-```bash
-git switch Shailesh-Parshewar
-git switch -c Data-Structures-Algorithms
-```
-
-Then add your files inside:
-
-```text
-Data-Structures-Algorithms/Shailesh-Parshewar/
-```
-
-**Important:** Create each subject branch from your student branch, not from another subject branch. This keeps subject work separate and makes it easier to merge your contributions.
-
-If a subject directory already exists, use it rather than creating a duplicate or differently named directory.
-
-## 6. Committing Your Work
+Work only within your assigned student directory and the appropriate subject or course directory.
 
 Before committing, check your changes:
 
 ```bash
 git status
+git diff
 ```
 
-Stage the relevant files and commit them:
+Stage the relevant files and commit your work:
 
 ```bash
-git add .
-git commit -m "Add Python practice exercises"
+git add <files-or-directory>
+git commit -m "Describe your changes"
 ```
 
-Use meaningful commit messages that describe what you changed.
-
-Good examples:
-
-- `Add Python loops exercises`
-- `Implement binary search`
-- `Add array operations`
-- `Fix linked list traversal`
+Commit messages should be short, meaningful, and describe what changed.
 
 Avoid vague messages such as `update`, `changes`, or `final`.
 
-## 7. Merging Subject Work into Your Student Branch
+## 6. Merging Your Working Branch
 
-After finishing a subject task, switch back to your student branch:
-
-```bash
-git switch Shailesh-Parshewar
-```
-
-Merge the subject branch into it:
+Once your work is ready, merge the working branch into your student branch.
 
 ```bash
-git merge Python
+git switch student-name
+git merge student-name-subject-name
 ```
 
-Repeat for each subject branch whose work you want to include.
+Resolve any merge conflicts before proceeding. Test or review your changes after the merge to ensure that the resulting work is correct.
 
-Resolve any merge conflicts before continuing. Make sure the resulting files are in the correct `Subject/Your-Name/` directories.
+Do not merge your working branch directly into the shared semester branch.
 
-Your student branch is now the branch that contains the combined work you intend to submit.
+## 7. Pushing Your Contribution
 
-## 8. Pushing Your Student Branch
-
-Before pushing, ensure that your student branch contains the latest semester changes where appropriate and that your work is committed.
-
-If you have permission to push your student branch to the central repository:
+Push your student branch, not every local working branch.
 
 ```bash
-git push -u origin Shailesh-Parshewar
+git push -u origin student-name
 ```
 
-If contributions must go through your own fork, push your student branch to your fork instead:
+If you are working through your own fork, make sure `origin` points to your fork and that the original repository is configured as `upstream`.
+
+## 8. Creating a Pull Request
+
+Open a pull request on GitHub with the following configuration:
+
+- **Base repository:** The shared MCA Students Repository.
+- **Base branch:** `semester-1` (or the relevant semester branch).
+- **Compare branch:** Your student branch.
+
+Before submitting the pull request, ensure that:
+
+- Your changes are committed and pushed.
+- Your files are in the correct directories.
+- Your contribution does not unintentionally modify another student's work.
+- Your commits contain only the intended changes.
+
+Provide a clear title and a short description of what you have added or changed.
+
+Wait for review and approval before considering the contribution complete.
+
+## 9. After Your Pull Request Is Merged
+
+**Do not delete your student branch after a pull request is merged.** It is a persistent branch intended for future coursework and contributions.
+
+The shared semester branch now contains your merged work. Your student branch remains available for your next contribution.
+
+Before beginning another contribution, synchronize your student branch with the latest semester branch:
 
 ```bash
-git push -u origin Shailesh-Parshewar
+git fetch origin
+git switch semester-1
+git pull origin semester-1
+
+git switch student-name
+git merge semester-1
 ```
 
-In the fork workflow, `origin` should point to your fork, while the original repository is typically configured as `upstream`.
+Resolve any conflicts if they occur.
 
-**Do not push your local subject branches to the central repository.** The student branch is the contribution branch used for review.
+Next, create a new working branch from your updated student branch, make your changes, merge the working branch back into your student branch, and submit another pull request.
 
-## 9. Opening a Pull Request
+Delete an old working branch only when its work has been merged and you no longer need it.
 
-Open a pull request on GitHub with these settings:
+## 10. Repository Rules
 
-- **Base repository:** The shared MCA Students Repository, or the original repository if working through a fork.
-- **Base branch:** `semester-1`.
-- **Compare branch:** Your student branch, such as `Shailesh-Parshewar`.
+All contributors are expected to follow these rules:
 
-In the pull request description, briefly explain:
-
-- Which subjects you worked on.
-- What you added or changed.
-- Any relevant assignment or exercise details.
-
-Review the changed-files list before submitting. Confirm that your files are inside the correct directories and that you have not accidentally included unrelated changes.
-
-Wait for review and approval before expecting the contribution to be merged.
-
-After merging, your work will be available in the shared repository under the relevant subject directory. For example:
-
-```text
-semester-1/
-└── Python/
-    └── Shailesh-Parshewar/
-        ├── loops.py
-        └── functions.py
-```
-
-The student directory remains in the shared semester branch even after the student branch is no longer needed.
-
-## 10. Rules for Contributions
-
-Please follow these rules:
-
-- Contribute only to your own student directories unless you have permission to modify another student's work.
-- Do not delete, rename, or overwrite another student's files without permission.
-- Use the existing subject directory names exactly as they appear in the repository.
-- Do not create unnecessary nested directories.
-- Do not commit passwords, API keys, tokens, `.env` files, or other secrets.
-- Avoid committing generated files, dependencies, or unrelated personal files.
-- Keep your work relevant to the subject and explain your code where necessary.
-- Do not force-push shared branches or attempt to bypass branch protection.
-- Follow any additional instructions from the repository maintainer or faculty.
-
-### Do Not Delete Your Student Branch
-
-**Your student branch is meant to be reused for future contributions. Do not delete it after your pull request has been merged.**
-
-You will continue using the same student branch for future assignments, practicals, and coursework.
-
-For each new contribution:
-
-1. Update your local `semester-1` branch with the latest changes.
-2. Update your student branch with the latest `semester-1` changes.
-3. Create a new local subject branch for your next task, or reuse an existing one if appropriate.
-4. Commit your work and merge the subject branch back into your student branch.
-5. Push your student branch and open another pull request targeting `semester-1`.
-
-The student branch is your ongoing contribution branch, not a temporary branch for a single pull request.
-
-You may delete temporary subject branches after merging their work into your student branch if you no longer need them.
+- Do not push directly to protected branches.
+- Do not bypass branch protections or pull request reviews.
+- Do not force-push shared or protected branches.
+- Do not modify another student's work without permission.
+- Do not commit secrets, API keys, passwords, or other sensitive information.
+- Do not add generated files, dependencies, or unrelated files unless they are required for the contribution.
+- Follow the established directory structure and naming conventions.
+- Keep your student branch persistent and use it for future contributions.
 
 ## 11. Common Mistakes to Avoid
 
-### Creating a student directory at the wrong level
+- Creating a working branch with only a subject name.
+- Using slashes in branch names to simulate nested branches when a student branch already exists with that prefix.
+- Creating a working branch from another working branch.
+- Placing files outside your own student directory.
+- Opening a pull request against the wrong base branch.
+- Pushing every local working branch to the shared repository.
+- Deleting your student branch after a pull request is merged.
+- Assuming Git branches are directories nested within other branches.
 
-Incorrect:
+## Final Reminder
 
-```text
-semester-1/
-└── Shailesh-Parshewar/
-    └── Python/
-```
+The goal of this repository is to maintain organized academic work while helping everyone develop practical Git and GitHub collaboration skills.
 
-Correct:
-
-```text
-semester-1/
-└── Python/
-    └── Shailesh-Parshewar/
-```
-
-### Creating a subject branch from another subject branch
-
-Avoid building a chain of subject branches. Create each subject branch from your student branch.
-
-### Opening a pull request against the wrong branch
-
-Your pull request should target `semester-1`, not `main` or a local subject branch.
-
-### Pushing every branch
-
-Push your student branch for review. Keep subject branches local or in your own fork unless explicitly instructed otherwise.
-
-### Assuming branches are directories
-
-A branch name does not determine the directory structure. You must place files in the correct subject and student directories yourself.
-
-## 12. Getting Help
-
-If you are unsure about the directory structure, Git commands, merge conflicts, or pull request process, ask the repository maintainer before making changes that could affect shared work.
-
-Thank you for contributing and helping build a useful learning resource for MCA students at IMCC!
-
-**Learn, practice, contribute, and collaborate.** 🚀
+**Use your student branch as your persistent workspace, use clearly named working branches for individual contributions, and submit your work through pull requests.**
